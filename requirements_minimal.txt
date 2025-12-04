@@ -1,0 +1,6 @@
+# UV Island Coloring Tool - Minimal Dependencies
+# Only for complex mode (no external dependencies needed for this mode)
+
+# Core dependencies
+Pillow>=9.0.0
+numpy>=1.21.0

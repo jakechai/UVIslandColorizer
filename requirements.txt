@@ -1,0 +1,14 @@
+# UV Island Coloring Tool - Minimal Dependencies
+
+# Core dependencies (required for all modes)
+Pillow>=9.0.0
+numpy>=1.21.0
+
+# For original fast mode
+scipy>=1.9.0
+
+# For opencv mode
+opencv-python>=4.5.0 
+
+# For skimage mode
+scikit-image>=0.19.0        

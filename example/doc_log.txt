@@ -1,0 +1,156 @@
+I:\temp\python_tool\UVIslandColorizer\example>"I:\ComfyUI\python_embeded\python.exe" "I:\temp\python_tool\UVIslandColorizer\UVIslandColorizer.py" -h
+usage: UVIslandColorizer.py [-h] [--mode {fast,complex,opencv,skimage}] [--threshold THRESHOLD]
+                            [--solid-threshold SOLID_THRESHOLD] [--invert-mask] [--border-scale BORDER_SCALE]
+                            [--fade-alpha] [--blended-only] [--batch]
+                            input output
+
+UV Island Coloring Tool - Complete version with alpha handling
+
+positional arguments:
+  input                 Input image file or directory
+  output                Output image file or directory
+
+options:
+  -h, --help            show this help message and exit
+  --mode {fast,complex,opencv,skimage}
+                        Processing mode (default: fast)
+  --threshold THRESHOLD
+                        Alpha threshold for images with alpha (0.0-1.0, default: 0.1)
+  --solid-threshold SOLID_THRESHOLD
+                        Brightness threshold for images without alpha (0.0-1.0, default: 0.9)
+  --invert-mask         Invert mask for images without alpha (default: dark=transparent)
+  --border-scale BORDER_SCALE
+                        Border scale (0.0-2.0, default: 0.1)
+  --fade-alpha          Fade alpha at borders (default: sharp edges)
+  --blended-only        Use only blended colors (default: pure colors first)
+  --batch               Batch process all images in input directory
+
+Supported Formats: .bmp, .gif, .ico, .jpeg, .jpg, .pbm, .pgm, .png, .ppm, .tga, .tif, .tiff, .webp
+
+Available Modes:
+  fast      - Original fast mode (requires SciPy)
+  complex   - Original complex mode (slow but precise, no external dependencies)
+  opencv    - Optimized with OpenCV (fastest, requires OpenCV)
+  skimage   - Optimized with scikit-image (requires scikit-image)
+
+For images without alpha channels:
+  - Alpha mask is created from brightness
+  - Use --solid-threshold to adjust sensitivity (higher = more strict)
+  - Use --invert-mask for light backgrounds
+
+Library Status:
+  SciPy:       ✓ Available
+  OpenCV:      ✓ Available
+  scikit-image: ✓ Available
+
+Examples:
+  Single file with alpha:
+    UVIslandColorizer.py input.tga output.png --mode fast
+
+  Single file without alpha (dark lines on light background):
+    UVIslandColorizer.py input.jpg output.png --mode opencv --solid-threshold 0.8
+
+  Single file without alpha (light lines on dark background):
+    UVIslandColorizer.py input.jpg output.png --mode opencv --solid-threshold 0.8 --invert-mask
+
+  Batch processing:
+    UVIslandColorizer.py input_folder output_folder --batch --mode fast
+
+
+I:\temp\python_tool\UVIslandColorizer\example>"I:\ComfyUI\python_embeded\python.exe" "I:\temp\python_tool\UVIslandColorizer\UVIslandColorizer.py" input.TGA output_fast.png --mode fast --border-scale 0.1
+============================================================
+UV ISLAND COLORING TOOL - COMPLETE VERSION
+============================================================
+Mode: fast
+Alpha threshold: 0.1
+Brightness threshold: 0.9
+Invert mask: No
+Border scale: 0.1
+Alpha fading: Disabled
+Color strategy: Pure first
+------------------------------------------------------------
+Original image mode: RGBA
+Loaded with PIL: input.TGA
+Image size: 2048x2048
+Has alpha data: True
+Running original fast mode...
+Found 5 UV island(s)
+Saved with OpenCV: output_fast.png
+Processing time: 0.659 seconds
+============================================================
+PROCESSING COMPLETED
+============================================================
+
+I:\temp\python_tool\UVIslandColorizer\example>"I:\ComfyUI\python_embeded\python.exe" "I:\temp\python_tool\UVIslandColorizer\UVIslandColorizer.py" input.TGA output_complex.png --mode complex --border-scale 0.1
+============================================================
+UV ISLAND COLORING TOOL - COMPLETE VERSION
+============================================================
+Mode: complex
+Alpha threshold: 0.1
+Brightness threshold: 0.9
+Invert mask: No
+Border scale: 0.1
+Alpha fading: Disabled
+Color strategy: Pure first
+------------------------------------------------------------
+Original image mode: RGBA
+Loaded with PIL: input.TGA
+Image size: 2048x2048
+Has alpha data: True
+Running original complex mode...
+Finding islands: 90.0%
+Found 5 UV island(s)
+Processing edges...
+Edge processing completed.
+Saved with OpenCV: output_complex.png
+Processing time: 71.636 seconds
+============================================================
+PROCESSING COMPLETED
+============================================================
+
+I:\temp\python_tool\UVIslandColorizer\example>"I:\ComfyUI\python_embeded\python.exe" "I:\temp\python_tool\UVIslandColorizer\UVIslandColorizer.py" input.TGA output_skimage.png --mode skimage --border-scale 0.5
+============================================================
+UV ISLAND COLORING TOOL - COMPLETE VERSION
+============================================================
+Mode: skimage
+Alpha threshold: 0.1
+Brightness threshold: 0.9
+Invert mask: No
+Border scale: 0.5
+Alpha fading: Disabled
+Color strategy: Pure first
+------------------------------------------------------------
+Original image mode: RGBA
+Loaded with PIL: input.TGA
+Image size: 2048x2048
+Has alpha data: True
+Running scikit-image optimized mode...
+Found 5 UV island(s)
+Saved with OpenCV: output_skimage.png
+Processing time: 2.549 seconds
+============================================================
+PROCESSING COMPLETED
+============================================================
+
+I:\temp\python_tool\UVIslandColorizer\example>"I:\ComfyUI\python_embeded\python.exe" "I:\temp\python_tool\UVIslandColorizer\UVIslandColorizer.py" input.png output_opencv.png --mode opencv --border-scale 0.5
+============================================================
+UV ISLAND COLORING TOOL - COMPLETE VERSION
+============================================================
+Mode: opencv
+Alpha threshold: 0.1
+Brightness threshold: 0.9
+Invert mask: No
+Border scale: 0.5
+Alpha fading: Disabled
+Color strategy: Pure first
+------------------------------------------------------------
+Loaded with OpenCV: input.png
+Image size: 2048x2048
+Has alpha data: True
+Running OpenCV optimized mode...
+Found 5 UV island(s)
+Saved with OpenCV: output_opencv.png
+Processing time: 2.690 seconds
+============================================================
+PROCESSING COMPLETED
+============================================================
